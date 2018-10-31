@@ -1,0 +1,690 @@
+
+
+Ceto Version 1.1.4
+
+- Fixed planar reflection clip plane offset not working.
+  This was broken in version 1.1.2.
+
+- Transparent ocean shaders queue changed to -101 to 
+  prevent ocean rendering over tree billboards.
+
+- Small optimization for query tasks if query does not sample spectrum.
+
+- Scheduler will now only wait for threaded tasks when cancelling.
+
+- Fixed a 'Minimum texture size 4x4' error on PS4.
+
+- Optimizations to how wave overlays are culled by camera.
+
+- Foam trail/thruster scripts now have a draw distance setting.
+  Any overlays farther than this to the camera dont get drawn.
+
+- Fixed issue with ocean going completely transpartent in Unity 5.5
+
+
+Ceto Version 1.1.3
+
+- Fixed a issue with the underwater post effect not working 
+  in the build. This was broken in the last update.
+
+- Small changes to the projector aiming to minimize a line
+  artefact that appears across the horizon when ocean viewed
+  from a low angle.
+
+- Fixed depth pass texture having wrong filter mode.
+
+- Improvements to the way refraction distortion is handled.
+  This should fix issue around edges of object in the water.
+
+- Improvements to the way caustic distortion is handled.
+
+- Changed how stero camera for VR is handled from conditional 
+  statement to keyword.
+
+- Underwater post effect attenuate by sun is now a slider
+  instead of a bool on/off.
+
+- Some minor allocation reductions.
+
+
+Ceto Version 1.1.2
+
+- Fixed VR issues in 5.4 and added support for SteamVR.
+  See manual on how to Set Ceto up for VR.
+
+- Added a tight projection fit option to the ocean.
+  This needs to be unticked to prevent some issue with the
+  ocean grid in VR.
+
+- Fixed underwater mask texture not being cleared to correct color.
+
+- Fixed the height overlay mask mode not having correct default value.
+
+- Improved how spectrum caching works. Added tutorial for 
+  spectrum caching to the manual. Use this to improve performance
+  where change ocean conditions frequently.
+
+- Fixed caching spectrum conditions not working until 
+  spectrum start called.
+
+- Fixed a black flickering patch that occurred in certain
+  objects reflections when blurred in HDR.
+
+- The underwater post effect will now not run if the 
+  grid is disabled.
+
+- Underwater mode BELOW_ONLY has been added. If your game is
+  all underwater use this mode to disable the top side mesh.
+
+- Fixed Asyc wave queries not working.
+
+- Added better support for async wave querys. See manual for
+  a tutorial on how to use async query tasks.
+
+- Refraction intensity has been split into two settings.
+  One for above and below.
+
+- Fixed wave ranges being incorrect if spectrum disabled
+
+- Fixed depth grab not working on Legacy Deferred
+
+- Fixed overlay normals not facing correct direction when 
+  overlay is rotated.
+
+
+Ceto Version 1.1.1
+
+- Fixed a bug where the ocean position offset was not being 
+  initialized to zero.
+
+- Fixed a null ref exception when the AddWaveOverlay was added
+  during run time.
+
+- Fixed a issue where the foam was too bright during night.
+
+- Removed SSS from being applied at night to help reduce
+  the brightness of the ocean.
+
+- Fixed a issue with the grid breaking when underwater 
+  and looking straight up.
+
+- The scene view camera will now display the refraction.
+
+- WebGL now working. Underwater mode must be set 
+  to USE_OCEAN_DEPTHS_PASS. Other mode is not currently working.
+
+- Caustics have been added. Their settings can be found 
+  on the Underwater component. Not currently working for 
+  USE_OCEAN_DEPTHS_PASS underwater mode and for some
+  older versions (5.1.3) of Unity in deferred.
+  
+- Memory allocations have been reduced. This is the lowest
+  they are likely to get. Should be 0.3KB to 2.3KB depending
+  on settings.
+  
+- There is now a overlay blend mode on the ocean component for
+  the height and foam overlay buffers. 
+
+- Fixed a bug where the underwater post effect was flipped in
+  forward rendering if multi-sample enabled.
+
+- Fixed a bug where the wave query's were not correct when 
+  height overlay blend made set to max.
+
+
+Ceto Version 1.1.0
+
+- Fixed a crash caused by using the normal overlay in SM2.
+
+- Fixed a exception being thrown if heights queried before spectrum
+  buffers being created.
+
+- CPU Fourier math now 30% faster.
+
+- CPU spectrum init now 30% faster.
+
+- Creation of spectrum (from wind speed, wave age, etc) now 30% 
+  faster. This is only calculated if the settings change.
+
+- There is now a AddAutoShoreMask script. Add this to your terrain 
+  and it will create a shore line automatically at run time. This 
+  is not recommended for very large terrain as it will be to slow. 
+  You will still need to make the masks manually in this case.
+
+- There is now a editor window (Windows/Ceto/ShoreMaskExporter) that 
+  can be used to create the shore mask for a terrain and save them 
+  as a png to the asset folder. You must have a terrain selected in 
+  the scene before clicking the 'Export Shore Masks' button. 
+  You can then use Ceto's AddShoreMask script and add the masks to 
+  the appropriate slots. More detail on this will be added to the 
+  manual soon.   
+
+- There are now two spectrum type options, Unified and Phillips. 
+  Phillips is cheaper but does not scale well when wind speed is 
+  increased. Unified is more expensive but scales better when wind 
+  speed increased. Both have there own unique look. There is also 
+  a UnifiedPhillips option which is a mix of the two.
+
+- There is now a CUSTOM spectrum type option. This allows you to 
+  create your own spectrum. You need to create a script that 
+  implements the ICustomWaveSpectrum interface. 
+  See the CustonWaveSpectrumExample script to see how to do this.
+
+- A new Shader key word has been added (CETO_USE_4_SPECTRUM_GRIDS). 
+  This is used to reduce the amount of texture look ups in the 
+  shader when only 1 or 2 grids are used.
+
+- There are now options to use 1 to 4 spectrum grids. Each grid 
+  requires its own Fourier transform so less grids is cheaper but 
+  will have less detail and the texture tiling will be more visible. 
+  The ocean shader is also cheaper to render when 1 or 2 grids are used. 
+
+- Moved some data processing of CPU fourier results off main thread 
+  saving about 1.0ms at default settings.
+
+- Fixed a issue with the refraction distortions when using 
+  USE_OCEAN_DEPTH_PASS mode causing pixels above the water being 
+  distorted. The last version broke this.
+
+- Fixed a issue where the ocean was disappearing in certain cases 
+  like if the camera was moved a very far distance in a single 
+  frame or if another camera thats was far away was enabled.
+  
+- Fixed a issue where a mesh was not being destroyed between scenes. 
+
+- Fixed a issue where the reflection and ocean depth cam were not 
+  using the culling distances from camera. You can enable this by 
+  ticking the 'Copy Cull Distances' on the PlanarReflection script 
+  on the ocean.
+  
+- There is now a ReflectionCameraCullingDistances script that can 
+  be used to manually adjust the culling distances on the reflection 
+  camera if you want. You must add this script to your camera and 
+  the script will update the culling distances on the reflection 
+  camera created for this camera. You must untick the 'Copy Cull Distances'
+  on the PlanarReflection script on the ocean otherwise it will copy 
+  directly from the camera and over write these distances.
+
+- Applying the global foam texture to the spectrum foam is now optional. 
+  Untick the 'texture foam' option on the WaveSpectrum script to disable it.
+
+- Applying the global foam texture to the overlay foam is now optional. 
+  Untick the 'texture foam' option on the overlay script to disable it.
+
+- Spectrum foam now uses the same choppyness value as the waves so
+  the foam location better matches that of the waves. This does mean 
+  that foam will be less visible at the default choppyness value of 0.8. 
+  See me if you want to change it back.
+  You may need to adjust your foam and coverage settings.
+
+- Fixed a crash in the Fourier task that could occur if the 
+  displacements were disabled as a multithreading task was running.
+
+- The shaders have been restructured where they now contain no code, 
+  just defines and cginc's. This has been done so support for SM5/SM2 
+  specific features will be easier to add in a future update.
+  
+- Wave queries now have 0 memory allocations.
+
+- You can now change the sampling for the default query used by the 
+  ocean using the SetQueryWavesSampling function on the ocean instance.
+
+- You can now query the ocean normal at any location by calling the 
+  QueryNormal function on the ocean instance This calculates the normal 
+  using finite difference which is not 100% accurate and will be a bit
+  slow but this is the only option.
+
+- Fixed a bug where underwater effect was dependant on far plane distance. 
+  This meant if the far plane value changes the fog looks different.
+  Effect should now look the same if far plane value changed. 
+  You may need to re-adjust the below inscatter scale and the below 
+  absorption scale settings.
+
+- Fixed a recursive culling error in Unity 5.4
+
+- Task scheduler will now cancel threaded tasks when scene/game exits.
+
+- Added ./ to the folder path for cginc files.
+
+- Fixed a bug where spectrum max displacement was using 
+  MAX_WAVE_HEIGHT instead of MAX_SPECTRUM_WAVE_HEIGHT.
+
+- Fixed a bug where the queried wave height was not being clamped to 
+  MAX_SPECTRUM_WAVE_HEIGHT.
+
+- max overlay and spectrum heights lowered (overlay from 30 to 20 
+  and spectrum from 50 to 40) as the larger values could cause
+  problems and they were higher than most people needed.
+  
+- The AddWaveOverlay and AddShoreMask scripts rotation will now be
+  relative to the parent. There is a rotation mode setting on the 
+  script that can disable this if needed. 
+  
+- AddShoreMask now has a offset value so you can add the script 
+  to your terrain and use the offset to match the terrains position.
+  
+- The wave foam and slopes will no longer be sampled by manually 
+  providing  the derivatives. Turned out this was not supported on 
+  PS4 and was of little use anyway. It also saved 10-20 math 
+  instructions in the shader. This means the slope and foam 
+  smoothing settings are not on the wave spectrum script any more.
+  
+- There is now a OceanCameraSettings script you can add to any 
+  camera to adjust how the ocean is rendered for this camera. 
+  You can do things like disable the reflection, underwater, 
+  or overlays as well as adjust there resolution. This is designed 
+  for secondary cameras in the scene that dont need to render the 
+  ocean at full detail and will help with performance. If the 
+  camera does not have one of these scripts attached to it will 
+  just use the default settings on the ocean.
+
+- Fixed a issue where the projection was not taking the grid scale 
+  into account. This was causing the grid resolution to be lest 
+  than optimal and causing it to jitter in some cases. 
+  On screen grid resolution should now be about 5 times better 
+  with no extra cost.
+
+- Fixed a issue with the height overlays being flipped on Mac.
+
+- The AddWaveOverlayBase class now has a Translate function you 
+  can call if you offset your scene. This will offset the overlays 
+  correctly for the foam trail script. 
+  
+
+
+Ceto Version 1.0.9
+
+- Fixed a issue if no skybox material was being used then the 
+  transparent prefab was not rendering correctly.
+
+- Now hiding system io for web player
+
+- Fix a issue where reflection and underwater was not rendering
+  correctly if the camera view port rect was not 0,0,1,1
+
+- Fixed a issue where the default sky color was not being used if 
+  no reflection script added to ocean
+
+- Fixed a issue where changing the projected grid transform was 
+  causing it to not render correctly.
+
+- Fixed a bug where the overlay height alpha was being set to 0 in
+  the AddWaveOverlay start function.
+
+- Fixed a issue where the overlay manager was clearing a null texture 
+ was causing other cameras in the scene to not render.
+
+- Fixed a issue where Ceto was causing the scene view tab to go black. 
+
+- Fixed a issue where clicking the camera in the scene was causing 
+  the scene view window to go black. 
+
+- Fixed issue where particles were being drawn over ocean even if 
+  under the surface.
+
+- Refraction cmd will now only grab the depth texture. 
+  It wont do a screen grab. If you have removed the grab pass in the
+  shader you need to add it back. 
+
+- Fixed bug where if depth blend was > 0 with USE_OCEAN_DEPTH_PASS the 
+  underwater effect was much darker than it should be.
+
+- Opaque materials now have a edge faded added. Edge fade setting has 
+  been moved from material to underwater component.
+
+- Memory allocations have been reduced by 2kb
+
+- Projections math has been reduced from 0.33ms to 0.17ms.
+
+- removed some redundant files.
+
+- Wave overlays can now subtract from ocean wave height as well as 
+  added to it.
+
+- UV offset has been added to wave overlays. 
+
+- Fixed a issue where some sky assets (like ToD) were not having the 
+  skybox in ocean reflections.
+
+- Fixed a issue where some overlays not being added to ocean if ocean
+  starts disabled.
+
+
+Ceto Version 1.0.8
+
+- Fixed the issue where the sky intensity in the reflections was
+  brighter than other objects. You will need to change the reflection 
+  intensity from 0.5 to 1.0 as it was lowered to 0.5 to try and 
+  offset the sky brightness. 
+
+- Fixed a issue where reflection blur in deferred/linear was not 
+  working if camera did not have hdr enabled.
+
+- Fixed a issue where if the opaque materials used with deferred 
+  the underwater effect was not working correctly.
+
+- Fixed a issue where skybox was still in reflections if camera 
+  clear flags set to solid.
+
+- Fixed a issue where normals on underside mesh not reflected causing 
+  the underside to look to dark and have blue artefacts. This was most 
+  obvious when the underside was viewed against the terrain.
+  
+- Fixed a issue where transparent shader not blending if noforwardadd 
+  removed from shader.
+
+- Transparent shaders now have a edge blend feature. This can be adjusted
+  on the materials.
+
+- There is now a Ocean_TransparentQueue and a Ocean_OpaqueQueue prefab.
+
+- There will now be a warning printed out of the opaque materials are 
+  used without changing the underwater mode to USE_OCEAN_DEPTHS_PASS.
+  
+- MAX_OVERLAY_HEIGHT increased to 30. The overlay manager will now check
+  what the max overlay height alpha is and use that for the max displacement 
+  range. This will give a more optimal projection.
+  
+- Fixed a issue where setting the useMipmaps param on a temporary render 
+  texture is no longer supported in Unity 5.2+
+
+  
+Ceto Version 1.0.7
+
+- Fixed a issue if the camera far plane in less than double the ocean bottom 
+  distance (1000 by default) causing a semi-circle artefact in the 
+  underwater effect.
+  
+- Fixed a issue where the refraction command was not resizing when screen 
+  size changed.
+
+- Fixed a issue where moving the foam trail a large distance caused a 
+  excessive number of foam overlays to be created.
+  
+- Fixed a issue with disabling, moving and then enabling the foam trail or 
+  foam thruster script.
+
+- Added a feature to force the grid to recreate itself. 
+  (Ocean.Instance.Grid.ForceRecreate = true) 
+  Set this to true and the grid will recreate itself in the next update. 
+  The grid will then set this to false. Dont set this to true every frame.
+  
+- Fixed a issue with the underwater effect when viewing the ocean from both 
+  the scene and game view at the same time. 
+
+- Certain features will not show up in the scene view any more. The ocean
+  will have no refractions in the scene view (it will not appear transparent). 
+  Some features are difficult to support on the scene view camera.
+   
+- Fixed a bug where the copied camera for the reflections, ocean depth 
+  and ocean mask was destroying the original render target texture.
+
+- Fixed a bug where underwater post effect was trying to run even 
+  if ocean is disabled.
+
+- Fixed a issue where the mask was still being rendered even if 
+  camera did have a post effect script.
+
+- Possible fix for a null reference exception being thrown in the 
+  Projector update.
+  
+
+Ceto Version 1.0.6
+
+- Fixed a issue with some integrated cards where a render texture with
+  a R8 format was created but since that format was not supported on 
+  those cards it was causing them to crash.
+
+- Removed all foreach loops resulting in 30% memory allocation reduction.
+
+- Optimized shaders resulting in a 30% reduction in math operations.
+
+- Added a check when using R8 render texture format as its not supported 
+  on some integrated cards.
+
+- Fixed a issue where enabling multi sample was causing the post effect
+  shader to flip screen image.
+
+- Disabling the spectrum will now clear the wave textures so waves dont 
+  appear to freeze.
+
+  
+Ceto Version 1.0.5
+
+- fixed issue where null exception and  key already added to dictionary 
+  could happen when calling CreateAndCacheCondition on wave spectrum.
+
+- fixed bug where the read back for GPU displacements was not working.
+
+- fixed a bug where changing the projected grid resolution or the screen 
+  size caused the projection not to be updated correctly.
+
+- Fixed a issue with the tree bark ocean depth replacement shader.
+
+- Fixed a issue where the inscatter was not being applied using the correct
+  depth blend.
+
+- Fixed a issue where resources where not being released correctly. 
+  This was causing render textures and meshes to build up in the editor.
+
+- Fixed a issue where the reflection camera was not copying from the 
+  target camera.
+
+- More GC optimizations.
+
+- Fixed a issue where alpha value was not being set in the shader.
+
+- Fixed a issue where using the depth information for the underwater 
+  effect directly from the depth buffer then a artefact was occurring 
+  when using dx9/Deferred on Nivida cards.
+  
+- There is now a depth mode on the UnderWater component. When set to 
+  USE_OCEAN_DEPTH_PASS the depth information will be created by doing 
+  a separate depth pass of all objects in the depth layer mask. 
+  This will result in more draw calls but is needed when the material 
+  is in the opaque queue. If set to USE_DEPTH_BUFFER the depth info 
+  will come directly from the depth buffer. This means there is no 
+  need for a separate depth pass but this option will only work when 
+  the material is in the transparent queue.
+
+
+Ceto Version 1.0.4
+
+- The ocean will no longer throw a exception if at least SM3 is not 
+  supported. Instead any feature that requires at least SM3 will 
+  disable its self if not supported. Rendering the ocean still requires
+  at least SM3. This is for servers that just needed to generate the 
+  displacement data and dont render anything.
+
+- The displacement, slope and foam can now be disabled from a tick box 
+  on the wave spectrum script.
+
+- The wave spectrum fourier size can now the changed during runtime.
+
+- The wave spectrum will now only use temporary render textures.
+
+- Possible fix for spectrum render textures getting cleared when alt-tabbing.
+
+- A new query mode called CLIP_TEST has been added. Querys using this 
+  mode will just check if the position has been clipped and wont sample 
+  the wave height.
+
+- The way in which the uv distortion is applied to the refraction and 
+  reflections has been improved.
+
+- Fixed the bug where in forward and with no image effect on camera the 
+  refractions were flipped wrong way.
+
+- Fixed the bug where the under water effect was showing up where the 
+  ocean has a clip overlay added.
+
+- You can now added you own command buffer to do the refraction grab 
+  (if 'useCmdBufferForGrab' enable) This will allow you to post process 
+  the refraction texture before the ocean samples it.
+
+- lots of GC optimizations.
+
+- Fixed depth fighting issues in ocean mask.
+
+- you can now manually adjust the depth fade to blend between using
+  world y or cam z for the depths.
+
+- Underwater effect now has a blur option.
+
+- The spectrum conditions will now be cached so if changing the fouier 
+  size, wind speed, wave age or wind dir  the script will look to see if 
+  previous conditions have already been created with these settings and if
+  so the condition will be reused. You can also manually and conditions 
+  to the cache to pre-created conditions that maybe needed at a later time.
+  
+- The foam textures on the wave spectrum component have been moved to the 
+  ocean component.The textures will now be applied to the spectrum foam and
+  the overlay foam.
+  
+- Fixed a issue where the under water effect on top side mesh was not being 
+  applied correctly when ocean level not at 0.
+
+- Fixed bug where changing camera fov, near or far plane meant the mask, depths 
+  and reflections where not being rendered correctly.
+
+- Reflections now have a option to blur. Reflection roughness has been replaced 
+  with this. The old method just adjusted the mipmap level to blur but this 
+  created artefacts when sampling at low mipmaps.
+  
+
+Ceto Version 1.0.3
+
+- Modified how grid grouping works.
+
+- Fixed the ocean depths not rendering when under the water looking down.
+
+- Under side mesh will now use the below inscatter as the default color.
+  
+- Fixed the multi-threading 'wait on task' bug'.
+
+
+
+Ceto Version 1.0.2
+
+- Fixed ocean bottom translate bug.
+
+- Added ability for user to provide there own render reflections method 
+  with Ceto using there reflection texture.
+
+- Option to disable pixel lights in reflections.
+
+
+Ceto Version 1.0.1
+
+- Enabled underside mesh.
+
+- Fixed reflection offset bug when ocean level not 0.
+
+- Completed under side shader.
+
+- Completed underwater shader.
+
+- Added ocean depth replacement shader for TransperantCutOut, 
+  TreeBark, TreeLeaf, TreeOpaque, TreeTransparentCutout, TreeBillboard, 
+  Grass and GrassBillboard.
+  
+ - Fixed Overlay flipped in openGL.
+ 
+ - Overlay and spectrum foam texture now sample from alpha channel.
+ 
+ - Added inscatter modes and separate settings for above and below water.
+ 
+ - Remove multiply by Fresnel for lighting BRDF.
+ 
+ - New Fresnel power, min Fresnel and specular intensity added to 
+   ocean component.
+ 
+ - Remove Fresnel roughness parameter.
+ 
+ - Some optimization for memory allocations. 
+ 
+ - Default render queue for ocean mesh is now transparent. If you want 
+   shadows on ocean you will have to change queue to alpha tested.
+
+
+
+Ceto Version 1.0.0
+
+- Added extreme settings. You can now cause your computer to melt down if you wish. 
+
+- Fixed the Bug on the AMD cards causing the mesh to explode and the black marks.
+
+- Fixed the bug on the AMD cards causing a hole to appear in the mesh. 
+
+- There is still a issue with using the Fourier 512 size with AMD cards. 
+  It looks like they just dont have the precision to perform larger sized FFT.
+  Since most people wont use this setting and its only mean for new high 
+  end cards Im not worried about this. Its unlikely something I can fix anyway.
+
+- Overlay System complete. Can now use overlays to add height, normals, foam or
+  clip local areas of mesh. A mask and mask mode can be used to control how the 
+  overlay is added to the waves. Examples of how to use this system will be added
+  in future updates. 
+
+- Async wave query's disabled until support for height overlays added. 
+
+- Splash system added. Still WIP. 
+
+- Ocean cull system added. Currently disabled until complete.
+
+- Shader precision change from float to half or fixed where possible.
+
+- Projected grid will now split mesh into groups that can be culled.
+  Grouping levels high, medium, low added and single added. Single will
+  always create one mesh if possible with the resolution settings.
+
+- All ocean components now interact with the ocean script by abstract base class.
+  This will allow different ocean components to be added, ie alternative ocean meshes 
+  or wave generation methods. 
+
+- The waves displacements FFT can now be performed on the GPU. You must have a dx11 
+  computer to read back displacements for height querys.
+
+- Added option to disable displacement read back for GPU displacement FFT.
+  This will also disable wave query's meaning you cant get the wave heights.
+  Will be suitable for flight sims. 
+
+- Rendering of underside mesh disabled until full underwater support added.
+
+- Option to disable depth blend on underwater script.
+
+- Option to use command buffer to grab refraction added. This means only one grab 
+  pass will be used if ocean mesh is split into multiple meshes. Shader must use 
+  transparent queue for this to work. To use this enable 'use cmd buffer' on
+  under water component and then go to the OceanTopSide_BRDF shader. Comment out
+  the grab pass, uncomment the transparent tag and comment out the alphaTest tag. 
+
+- Refraction distortion artefact fixed.
+
+- Bug with refraction found that only occurs if forward rendering is used and no 
+  image effects are on camera. You can uncomment the shader CETO_FORWARD_AND_NO_IMAGE_EFFECT 
+  preprocessor to fixed this until issue is fixed.
+
+- A OceanGlobalDefines cginc added. You can disable the preprocessors to enable/disable
+  sampling of individual grid textures (displacements, slope, foam).
+  Use this to optimize your shader.
+
+- Frame rate spike caused by contested thread issue fixed. May still rarely happen
+  but cant capture it in profiler to conform (never seems to happen when profiler used).
+
+- GC spike fixed.
+
+- Fixed issue with incorrect normals in shader.
+  This also fixed HDR being excessively bright.
+
+- Fixed white spot bug in deferred rendering.
+
+- Fixed projected grid pulling from screen when camera looking up bug.
+  
+- Reflections not working in dx9 fixed.
+
+- Height query bug fixed.
+
+- Reflection 'shadow' artefact fixed.
+
+- Fixed bug where overlays not being rendered correctly when ocean level not at 0.
