@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 39823a1c4413fa442b4baa1916b04838
+timeCreated: 1461480796
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - oceanBottomSdr: {fileID: 4800000, guid: 025ba020bb8d8c34b8cf93e89481e9c2, type: 3}
+  - oceanDepthSdr: {fileID: 4800000, guid: d4f2fd6b57c2a4c46bb827b331ded9d4, type: 3}
+  - copyDepthSdr: {fileID: 4800000, guid: 621ac263e277f3d41803748c80e35a85, type: 3}
+  - normalFadeSdr: {fileID: 4800000, guid: 700a202cdafd90848a42228052fd92f5, type: 3}
+  - oceanMaskSdr: {fileID: 4800000, guid: af6dc2d08207f224c8faf15199f16886, type: 3}
+  - oceanMaskFlippedSdr: {fileID: 4800000, guid: 1935463df1964f1488b3e93ecc9d6355,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

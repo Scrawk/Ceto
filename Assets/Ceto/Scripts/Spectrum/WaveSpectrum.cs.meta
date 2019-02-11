@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0fddec90bb175f4468d1a1fb59a0e845
+timeCreated: 1439470230
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - initSlopeSdr: {fileID: 4800000, guid: cf937d5dcb108d244908f01f11d670b1, type: 3}
+  - initDisplacementSdr: {fileID: 4800000, guid: 619a4a17807fe654cac30df008eeb65c,
+      type: 3}
+  - initJacobianSdr: {fileID: 4800000, guid: 6d67df12791768640a7a90ec8f26000c, type: 3}
+  - fourierSdr: {fileID: 4800000, guid: d127f3581bef1f8429da3181dc5c9a79, type: 3}
+  - slopeCopySdr: {fileID: 4800000, guid: 36887ef2d1075064fb08b38b5b4c68d1, type: 3}
+  - displacementCopySdr: {fileID: 4800000, guid: db9c7c0f60a12434e98dc17aedbffe3c,
+      type: 3}
+  - foamCopySdr: {fileID: 4800000, guid: 457d39e82154fa64887177abb2bcbf1e, type: 3}
+  - readSdr: {fileID: 7200000, guid: 041fee007b220974b82541546097db52, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

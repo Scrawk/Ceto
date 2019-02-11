@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: f96ed9e3a7527e343a24a8b9d33a4e9f
+timeCreated: 1437316648
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - m_sun: {instanceID: 0}
+  - waveOverlaySdr: {fileID: 4800000, guid: 70a2b4c8bf2cf9a4f8c804238a143781, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

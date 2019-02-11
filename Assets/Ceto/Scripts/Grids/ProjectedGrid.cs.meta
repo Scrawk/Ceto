@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5ac848a9d87de654aa4cf7fd7767edc3
+timeCreated: 1436942286
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - oceanTopSideMat: {fileID: 2100000, guid: 77fcc3ae33d5521489feedd7ccc48bc4, type: 2}
+  - oceanUnderSideMat: {fileID: 2100000, guid: c2873b68f07420a4c947ebca75f60a3c, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
