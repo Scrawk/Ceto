@@ -266,9 +266,6 @@ namespace Ceto.Common.Unity.Utility
             if (setting == null)
                 throw new NullReferenceException("RTSettings is null");
 
-            if (!SystemInfo.supportsRenderTextures)
-                throw new InvalidOperationException("This system does not support render textures");
-
             RenderTextureFormat format = CheckFormat(setting);
 
             RenderTexture tex = new RenderTexture(setting.width, setting.height, setting.depth, format, setting.readWrite);
@@ -289,9 +286,6 @@ namespace Ceto.Common.Unity.Utility
 
             if (setting == null)
                 throw new NullReferenceException("RTSettings is null");
-
-            if (!SystemInfo.supportsRenderTextures)
-                throw new InvalidOperationException("This system does not support render textures");
 
             RenderTextureFormat format = CheckFormat(setting);
 

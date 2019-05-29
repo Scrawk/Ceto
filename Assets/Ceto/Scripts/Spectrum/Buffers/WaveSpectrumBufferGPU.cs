@@ -158,7 +158,7 @@ namespace Ceto
             int count = m_buffers.Length;
             for (int i = 0; i < count; i++)
             {
-				RTUtility.ReleaseAndDestroy(m_buffers[i].data);
+				//RTUtility.ReleaseAndDestroy(m_buffers[i].data);
                 m_buffers[i].data[0] = null;
                 m_buffers[i].data[1] = null;
             }
