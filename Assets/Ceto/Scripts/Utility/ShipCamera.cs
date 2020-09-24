@@ -18,16 +18,22 @@ namespace Ceto
 
 		public bool disableInterpolation;
 
+		public bool disableInput;
+
 		public GameObject m_ship;
 
 		public Vector3 m_forward = new Vector3(0,0,1);
 		
 		public float m_shipMoveSpeed = 20.0f;
 
+		public float m_shipTurnSpeed = 2.0f;
+
 		[Range(0.01f, 1.0f)]
 		public float shipSmoothness = 0.5f;
 
 		public float m_camRotationSpeed = 10.0f;
+
+		public float m_camScrollSpeed = 1.0f;
 
 		public float m_camStartRotationX = 180.0f;
 
@@ -150,6 +156,8 @@ namespace Ceto
 		void ProcessInput()
 		{
 
+			if (disableInput) return;
+
 			float speed = m_shipMoveSpeed;
 			float velocity = m_velocity.magnitude;
 
@@ -159,7 +167,7 @@ namespace Ceto
 			//move left
 			if(Input.GetKey(KeyCode.A))
 			{
-				float deg = speed * velocity * 2.0f;
+				float deg = speed * velocity * m_shipTurnSpeed;
 
 				m_target.turnAmount -= deg * Time.deltaTime;
 				m_target.camRotation.x -= deg * Time.deltaTime;
@@ -168,8 +176,8 @@ namespace Ceto
 			//move right
 			if(Input.GetKey(KeyCode.D))
 			{
-				float deg = speed * velocity * 2.0f;
-				
+				float deg = speed * velocity * m_shipTurnSpeed;
+
 				m_target.turnAmount += deg * Time.deltaTime;
 				m_target.camRotation.x += deg * Time.deltaTime;
 			}
@@ -191,7 +199,7 @@ namespace Ceto
 
 			m_target.forwardAmount += forward * speed * m_acceleration * Time.deltaTime;
 
-			float dt = Time.deltaTime * 1000.0f;
+			float dt = Time.deltaTime * 1000.0f * m_camScrollSpeed;
 			float amount = Mathf.Pow(1.02f, Mathf.Min(dt, 1.0f));
 			
 			if (Input.GetAxis("Mouse ScrollWheel") < 0.0f)

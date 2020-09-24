@@ -4,6 +4,11 @@ using System.Collections.Generic;
 namespace Ceto
 {
 
+	/// <summary>
+	/// My hack of a buoyancy script.
+	/// This is just for the demo. 
+	/// Dont use this script. I have no idea what I am doing.
+	/// </summary>
 	[AddComponentMenu("Ceto/Buoyancy/Buoyancy")]
 	public class Buoyancy : MonoBehaviour 
 	{
@@ -113,6 +118,8 @@ namespace Ceto
 
 			DragForce = 0.5f * dragCoefficient * DENSITY_WATER * unitScale * SubmergedVolume * velocity;
 
+			//Cant get the ship to stay level on the surface so added this hack.
+			//This is not a good idea.
 			Stickyness = Vector3.up * (WaterHeight-pos.y) * Mass * stickyness;
 
 		}

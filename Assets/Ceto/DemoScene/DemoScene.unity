@@ -43,7 +43,7 @@ RenderSettings:
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 11
+  serializedVersion: 12
   m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 10
+    serializedVersion: 12
     m_Resolution: 1
     m_BakeResolution: 50
     m_AtlasSize: 1024
@@ -62,6 +62,7 @@ LightmapSettings:
     m_AOMaxDistance: 1
     m_CompAOExponent: 0
     m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
@@ -76,10 +77,16 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 500
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 2
+    m_PVRDenoiserTypeDirect: 0
+    m_PVRDenoiserTypeIndirect: 0
+    m_PVRDenoiserTypeAO: 0
     m_PVRFilterTypeDirect: 0
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
-    m_PVRFilteringMode: 1
+    m_PVREnvironmentMIS: 0
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
@@ -87,9 +94,11 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
+    m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
+    m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_LightingSettings: {fileID: 259682461}
 --- !u!196 &5
 NavMeshSettings:
   serializedVersion: 2
@@ -109,6 +118,8 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
+    maxJobWorkers: 0
+    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -222,6 +233,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5d761bdc4020904fb08177544f68fd3, type: 3}
+--- !u!850595691 &259682461
+LightingSettings:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Settings.lighting
+  serializedVersion: 2
+  m_GIWorkflowMode: 1
+  m_EnableBakedLightmaps: 1
+  m_EnableRealtimeLightmaps: 0
+  m_RealtimeEnvironmentLighting: 1
+  m_BounceScale: 1
+  m_AlbedoBoost: 1
+  m_IndirectOutputScale: 1
+  m_UsingShadowmask: 0
+  m_BakeBackend: 0
+  m_LightmapMaxSize: 1024
+  m_BakeResolution: 50
+  m_Padding: 2
+  m_TextureCompression: 0
+  m_AO: 0
+  m_AOMaxDistance: 1
+  m_CompAOExponent: 0
+  m_CompAOExponentDirect: 0
+  m_ExtractAO: 0
+  m_MixedBakeMode: 1
+  m_LightmapsBakeMode: 1
+  m_FilterMode: 1
+  m_LightmapParameters: {fileID: 0}
+  m_ExportTrainingData: 0
+  m_TrainingDataDestination: TrainingData
+  m_RealtimeResolution: 1
+  m_ForceWhiteAlbedo: 0
+  m_ForceUpdates: 0
+  m_FinalGather: 0
+  m_FinalGatherRayCount: 1024
+  m_FinalGatherFiltering: 1
+  m_PVRCulling: 1
+  m_PVRSampling: 1
+  m_PVRDirectSampleCount: 32
+  m_PVRSampleCount: 500
+  m_PVREnvironmentSampleCount: 500
+  m_PVREnvironmentReferencePointCount: 2048
+  m_LightProbeSampleCountMultiplier: 4
+  m_PVRBounces: 2
+  m_PVRRussianRouletteStartBounce: 2
+  m_PVREnvironmentMIS: 0
+  m_PVRFilteringMode: 2
+  m_PVRDenoiserTypeDirect: 0
+  m_PVRDenoiserTypeIndirect: 0
+  m_PVRDenoiserTypeAO: 0
+  m_PVRFilterTypeDirect: 0
+  m_PVRFilterTypeIndirect: 0
+  m_PVRFilterTypeAO: 0
+  m_PVRFilteringGaussRadiusDirect: 1
+  m_PVRFilteringGaussRadiusIndirect: 5
+  m_PVRFilteringGaussRadiusAO: 2
+  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+  m_PVRFilteringAtrousPositionSigmaIndirect: 2
+  m_PVRFilteringAtrousPositionSigmaAO: 1
 --- !u!1001 &635450898
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -449,6 +521,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 11400362, guid: a0cc482d2da03784692568b56c77c234, type: 3}
+      propertyPath: textureFoam
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 11414226, guid: a0cc482d2da03784692568b56c77c234, type: 3}
       propertyPath: underwaterMode
       value: 1
@@ -457,13 +533,13 @@ PrefabInstance:
       propertyPath: depthMode
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11444958, guid: a0cc482d2da03784692568b56c77c234, type: 3}
+      propertyPath: m_sun
+      value: 
+      objectReference: {fileID: 1516563656}
     - target: {fileID: 11475164, guid: a0cc482d2da03784692568b56c77c234, type: 3}
       propertyPath: blurMode
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 11400362, guid: a0cc482d2da03784692568b56c77c234, type: 3}
-      propertyPath: textureFoam
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0cc482d2da03784692568b56c77c234, type: 3}
@@ -476,6 +552,26 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 106084, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 140108, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 148226, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 196204, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 434282, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 434282, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
+      propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 442244, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
@@ -510,26 +606,10 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 140108, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 148226, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 196204, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2317628, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b720137e1224c2646a16cadbe0118f1e, type: 2}
-    - target: {fileID: 11452076, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 11451028, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -538,12 +618,8 @@ PrefabInstance:
       propertyPath: normalMask
       value: 
       objectReference: {fileID: 2800000, guid: 2661ea6aa2e991b4ea7405ed492e542a, type: 3}
-    - target: {fileID: 434282, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 434282, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
-      propertyPath: m_LocalRotation.w
+    - target: {fileID: 11452076, guid: 42fe57227c0217a4abb522e3d650ec10, type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -574,12 +650,14 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516563656}
   m_Enabled: 1
-  serializedVersion: 8
+  serializedVersion: 10
   m_Type: 1
+  m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -589,6 +667,24 @@ Light:
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
   m_Cookie: {fileID: 0}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
@@ -596,12 +692,15 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_RenderingLayerMask: 1
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1516563658
@@ -704,7 +803,6 @@ GameObject:
   - component: {fileID: 1867462115}
   - component: {fileID: 1867462114}
   - component: {fileID: 1867462113}
-  - component: {fileID: 1867462112}
   - component: {fileID: 1867462110}
   - component: {fileID: 1867462111}
   m_Layer: 0
@@ -727,14 +825,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableInterpolation: 0
+  disableInput: 0
   m_ship: {fileID: 1789794820}
   m_forward: {x: 0, y: 0, z: 1}
-  m_shipMoveSpeed: 40
+  m_shipMoveSpeed: 50
+  m_shipTurnSpeed: 10
   shipSmoothness: 0.5
-  m_camRotationSpeed: 5
-  m_camStartRotationX: 270
+  m_camRotationSpeed: 10
+  m_camScrollSpeed: 0.1
+  m_camStartRotationX: 180
   m_camStartRotationY: 60
-  m_camStartDistance: 50
+  m_camStartDistance: 100
   camSmoothness: 0.5
 --- !u!114 &1867462111
 MonoBehaviour:
@@ -750,20 +851,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disableOnClip: 1
   controlUnderwaterMode: 0
-  attenuationBySun: 0
-  blurMode: 1
-  blurIterations: 2
+  attenuationBySun: 0.8
+  blurMode: 0
+  blurIterations: 3
   underWaterPostEffectSdr: {fileID: 4800000, guid: 22fc3bddb382ac842b11f94976df8f1b,
     type: 3}
-  blurShader: {fileID: 4800000, guid: a6bd98d36f0571e48a6d70aec0ea75f2, type: 3}
---- !u!92 &1867462112
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1867462108}
-  m_Enabled: 1
+  blurShader: {fileID: 0}
 --- !u!124 &1867462113
 Behaviour:
   m_ObjectHideFlags: 0
@@ -784,9 +877,10 @@ Camera:
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
   m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_GateFitMode: 2
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2

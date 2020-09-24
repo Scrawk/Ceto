@@ -48,7 +48,8 @@ namespace Ceto
 
 			if(Ocean.Instance == null) return;
 
-            UnderWaterPostEffect postEffect = m_camera.GetComponent< UnderWaterPostEffect>();
+			ShipCamera shipCam = m_camera.GetComponent<ShipCamera>();
+			UnderWaterPostEffect postEffect = m_camera.GetComponent< UnderWaterPostEffect>();
 
 			WaveSpectrum spectrum = Ocean.Instance.GetComponent<WaveSpectrum>();
 			PlanarReflection reflection = Ocean.Instance.GetComponent<PlanarReflection>();
@@ -63,10 +64,12 @@ namespace Ceto
 				GUILayout.EndHorizontal();
 				GUILayout.EndArea();
 			}
-			
-			if(m_hide) return;
 
-			if(reflection != null)
+			shipCam.disableInput = false;
+			if (m_hide) return;
+			shipCam.disableInput = true;
+
+			if (reflection != null)
 			{
 				bool on = reflection.enabled;
 				
@@ -126,7 +129,6 @@ namespace Ceto
 				GUILayout.Label("Wind Direction", GUILayout.MaxWidth(m_textWidth));
 				windDir = GUILayout.HorizontalSlider(windDir, 0.0f, 360.0f);
 				GUILayout.EndHorizontal();
-
 				Ocean.Instance.windDir = windDir;
 			}
 
@@ -324,6 +326,7 @@ Ceto Version " + Ocean.VERSION;
 			GUILayout.EndVertical();
 			GUILayout.EndArea();
 		}
+
 	}
 
 }
